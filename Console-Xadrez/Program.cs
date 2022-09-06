@@ -5,15 +5,26 @@ using Xadrez;
 try
 {
     TabuleiroTab tab = new TabuleiroTab(8, 8);
+    PartidaDeXadrez partida = new PartidaDeXadrez();
+    while (!partida.terminada)
+    {
 
-    tab.colocarPeca(new Torre(Cor.Preta, tab), new Posicao(0, 0));
-    tab.colocarPeca(new Torre(Cor.Preta, tab), new Posicao(1, 3));
-    tab.colocarPeca(new Rei(Cor.Preta, tab), new Posicao(0, 2));
+        Console.Clear();
+        Tela.ImprimirTabuleiro(partida.tab);
 
-    tab.colocarPeca(new Rei(Cor.Branca, tab), new Posicao(3,5));
-    Tela.imprimirTabuleiro(tab);
+        Console.WriteLine();
+        Console.Write("Origem: ");
+        Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+        Console.Write("Destino: ");
+        Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+        partida.executaMovimento(origem, destino);
+    }
+
+    Tela.ImprimirTabuleiro(tab);
 }
-catch (TabuleiroException e){
+catch (TabuleiroException e)
+{
     Console.WriteLine(e.Message);
 }
 Console.ReadLine();
