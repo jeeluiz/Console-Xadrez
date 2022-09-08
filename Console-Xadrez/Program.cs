@@ -2,29 +2,40 @@
 using Tabuleiro;
 using Xadrez;
 
-try
+namespace xadrez_console
 {
-    TabuleiroTab tab = new TabuleiroTab(8, 8);
-    PartidaDeXadrez partida = new PartidaDeXadrez();
-    while (!partida.terminada)
+    class Program
     {
+        static void Main(string[] args)
+        {
+            try
+            {
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                while (!partida.terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab);
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
 
-        Console.Clear();
-        Tela.ImprimirTabuleiro(partida.tab);
+                    bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossiveis();
 
-        Console.WriteLine();
-        Console.Write("Origem: ");
-        Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
-        Console.Write("Destino: ");
-        Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab, posicoesPossiveis);
 
-        partida.executaMovimento(origem, destino);
+                    Console.WriteLine();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    partida.executaMovimento(origem, destino);
+                }
+            }
+            catch (TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadLine();
+        }
     }
-
-    Tela.ImprimirTabuleiro(tab);
 }
-catch (TabuleiroException e)
-{
-    Console.WriteLine(e.Message);
-}
-Console.ReadLine();
