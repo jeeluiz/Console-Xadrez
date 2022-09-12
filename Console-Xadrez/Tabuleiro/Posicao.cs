@@ -27,10 +27,6 @@ namespace Tabuleiro
         {
             return Linha + ", " + Coluna; 
         }
-
-        internal void definirValores(object linhas, object value)
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }

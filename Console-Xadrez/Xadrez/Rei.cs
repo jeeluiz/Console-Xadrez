@@ -14,10 +14,10 @@ namespace Xadrez
             return "R";
         }
 
-        private  bool PodeMover(Posicao pos)
+        private bool PodeMover(Posicao pos)
         {
             Peca p = tab.peca(pos);
-            return p != null ||p.cor !=this.cor;
+            return p == null || p.cor != cor;
         }
 
         public override  bool[,] MovimentosPossiveis()
